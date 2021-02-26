@@ -33,51 +33,28 @@ public class FileEncryptor {
 			String words = JOptionPane.showInputDialog("Send the message you want to be encrypted");
 			char[] test = words.toCharArray();
 			for(int i = 0; i < test.length; i++) {
-				if(test[i] != ' ') {
-					if(test[i] != 87) {
-						if(test[i] != 88) {
-							if(test[i] !=89) {
-								if(test[i] !=90) {
-									if(test[i] !=119) {
-										if(test[i] !=120) {
-											if(test[i] !=121) {
-												if(test[i] !=122) {
-									
-				test[i] = (char) (test[i]+4);
-												}
-												else {
-													test[i] = 100;
-												}
-											}
-											else {
-												test[i] = 99;
-											}
-										}
-										else {
-											test[i] = 98;
-										}
-									}
-									else {
-										test[i] = 97;
-									}
-								}
-								else {
-									test[i] = 68;
-								}
-							}
-							else {
-								test[i] = 67;
-							}
+				System.out.println(test[i]);
+				if(Character.isAlphabetic(test[i])) {
+					if(Character.isUpperCase(test[i])) {
+						if(('A'+(test[i]-'Z'+29))>'Z'){
+							test[i] = (char) ('A'+(3-('Z'-test[i])));
 						}
 						else {
-							test[i] = 66;
+						test[i] = (char)('A'+(test[i]-'Z'+29));
 						}
-				}
-					else {
-						test[i] = 65;
 					}
+					if(Character.isLowerCase(test[i])) {
+						if(('a'+(test[i]-'z'+29))>'z'){
+							test[i] = (char) ('a'+(3-('z'-test[i])));
+						}
+						else {
+							test[i] = (char)('a'+(test[i]-'z'+29));
+						}
+			
+					}
+					
 				}
-				}
+			}
 			
 			
 			f.write(test);
@@ -86,5 +63,7 @@ public class FileEncryptor {
 		} catch (IOException e) {
 			
 		}
+		FileDecryptor test = new FileDecryptor();
+		test.decrypt();
 	}
 }

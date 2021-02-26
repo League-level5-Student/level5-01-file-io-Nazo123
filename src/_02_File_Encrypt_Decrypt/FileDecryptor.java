@@ -29,18 +29,38 @@ public class FileDecryptor {
 			String test = "";
 			int c = f.read();
 			test = test+(char)c;
+			String output = "";
 			while(c != -1) {
 				c = f.read();
 				test = test+(char)c;
 			}
 			char[] a = test.toCharArray();
 			for(int i = 0; i < a.length;i++) {
+				System.out.println(a[i]);
 				if(Character.isAlphabetic(a[i])) {
 					if(Character.isUpperCase(a[i])) {
-						a[i] = (char)('A'+('Z'-a[i])-24);
+						if('A'+(a[i]-'Z'+21)<'A'){
+							a[i] = (char)('A'+(('Z'-a[i])-3));
+							}
+							else {
+							a[i] = (char)('A'+(a[i]-'Z'+21));
+							}
 					}
+					if(Character.isLowerCase(a[i])) {
+						if('a'+(a[i]-'z'+21)<'a'){
+						a[i] = (char)('a'+(('z'-a[i])-3));
+						}
+						else {
+						a[i] = (char)('a'+(a[i]-'z'+21));
+						}
+						}
+					
 				}
+		System.out.println(a[i]);
+			output = output+a[i];
 			}
+		
+			System.out.println(output);
 		} catch (FileNotFoundException e) {
 		
 			e.printStackTrace();
