@@ -1,6 +1,7 @@
 package _03_To_Do_List;
 
 import java.awt.HeadlessException;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -12,6 +13,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class ToDoList {
+	String lastOpend;
 	ArrayList<String> toDo = new ArrayList<String>();
 	JFrame frame;
 	JPanel panel;
@@ -28,7 +30,8 @@ public class ToDoList {
 	frame.add(panel);
 	b1 = new JButton();
 	b1.addActionListener((s)->{
-		toDo.add((toDo.size()+1)+". "+JOptionPane.showInputDialog("What would you like to add to your to do list?"));
+		toDo.add((JOptionPane.showInputDialog("What would you like to add to your to do list? \n"
+				+ "WARNING: Do not use any of the following characters: , [ ]")));
 	});
 	panel.add(b1);
 	b1.setText("Add Task");
@@ -61,7 +64,8 @@ public class ToDoList {
 	b4.addActionListener((s)->{
 		try {
 			FileWriter f = new FileWriter(JOptionPane.showInputDialog("Where would you like to save the file and what should its name be.\n Ex: src/_03_To_Do_List/test"));
-			f.write(toDo.toArray().toString().toCharArray());
+			f.write(toDo.toString());
+			f.close();
 		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "File failed to save please enter a valid location");
 			//WORKING ON HERE NERD LOOK HERE OK STOP BEING BLIND
@@ -79,6 +83,41 @@ public class ToDoList {
 	b5 = new JButton();
 	panel.add(b5);
 	b5.setText("Load List");
+	b5.addActionListener((s)->{
+	try {
+		FileReader fr = new FileReader(JOptionPane.showInputDialog("Where would you like to load the file from. \\n Ex: src/_03_To_Do_List/test\""));
+		toDo.clear();
+		int test = fr.read();
+		String eee ="";
+		System.out.print("test");
+		while(test != -1) {
+			eee = eee + (char)test;
+			test = fr.read();
+		}
+		System.out.print(eee);
+		char[] ar = eee.toCharArray();
+		if(eee.equals("[]") == false) {
+		eee = "";
+		for(int i = 0; i < ar.length; i++) {
+			
+			if(ar[i]!='[') {
+				if(ar[i]!=','&&ar[i]!=']') {
+					eee = eee + ar[i];
+				
+				}
+				else {
+				toDo.add(eee);
+				eee = "";
+				i++;
+				}
+				}
+		}
+		}
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	});
 	frame.pack();
 	frame.setVisible(true);
 
@@ -104,3 +143,4 @@ public class ToDoList {
 	 * When the program starts, it should automatically load the last saved file into the list. 
 	 */
 }
+//Copyright © 2019 Ozan Bayraktaroglu

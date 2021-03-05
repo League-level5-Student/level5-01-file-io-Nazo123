@@ -1,26 +1,48 @@
 package _04_Directory_Iteration;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.JFileChooser;
-
+import java.nio.file.Paths;
 public class DirectoryIterator {
 	public static void main(String[] args) {
 		/* 
 		 * The following is an example of how to list all of the files in a directory.
 		 * Once the program is running, the directory is chosen using the JFileChooser.
 		 */
-		JFileChooser jfc = new JFileChooser();
-		jfc.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
-		int returnVal = jfc.showOpenDialog(null);
-		if (returnVal == JFileChooser.APPROVE_OPTION) {
-			File directory = jfc.getSelectedFile();
+			File directory = new File(Paths.get(".").toAbsolutePath().normalize().toString());
 			File[] files = directory.listFiles();
 			if(files != null) {
-				for(File f : files) {
-				  System.out.println(f.getAbsolutePath());
+				for(File f1 : files) {
+					if(f1.getAbsolutePath().contains("src")) {
+						File[] ae = f1.listFiles();
+						for(File a : ae) {
+						
+							  File[] taeta = a.listFiles();
+								for(File g : taeta) {
+									if(g.getAbsolutePath().contains(".java")) {
+										try {
+											FileWriter f = new FileWriter(g.getAbsoluteFile(), true);
+											
+											f.write("//Copyright © 2019 Ozan Bayraktaroglu");
+											f.close();
+										} catch (IOException e) {
+										
+											e.printStackTrace();
+										}
+										
+										
+										System.out.println(g.getAbsolutePath());
+										
+									}
+									 
+								}
+						}
+					}
 				}
-			}
+			
 		}
 		
 		/*
@@ -31,3 +53,4 @@ public class DirectoryIterator {
 		 */
 	}
 }
+//Copyright © 2019 Ozan Bayraktaroglu

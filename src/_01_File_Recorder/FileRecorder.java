@@ -18,3 +18,4 @@ public class FileRecorder {
 		}
 	}
 }
+//Copyright © 2019 Ozan Bayraktaroglu

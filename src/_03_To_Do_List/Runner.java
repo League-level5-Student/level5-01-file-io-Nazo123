@@ -6,3 +6,4 @@ public class Runner {
 		a.Start();
 	}
 }
+//Copyright © 2019 Ozan Bayraktaroglu

@@ -71,3 +71,4 @@ public class FileDecryptor {
 
 			}
 }
+//Copyright © 2019 Ozan Bayraktaroglu

@@ -67,3 +67,4 @@ public class FileEncryptor {
 		test.decrypt();
 	}
 }
+//Copyright © 2019 Ozan Bayraktaroglu
