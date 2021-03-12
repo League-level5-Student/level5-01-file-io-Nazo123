@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
  * Challenge: Complete the SaveData class so that the test passes.
  */
 public class Serialization {
-	private static final String DATA_FILE = "src/_04_Serialization/saved.dat";
+	private static final String DATA_FILE = "src/_05_Serialization/saved.dat";
 
 	@Test
 	public void test() {
@@ -40,7 +40,8 @@ public class Serialization {
 	 * and ObjectOutputStream.
 	 */
 	private static void save(SaveData data) {
-		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); ObjectOutputStream oos = new ObjectOutputStream(fos)) {
+		try (FileOutputStream fos = new FileOutputStream(new File(DATA_FILE)); 
+				ObjectOutputStream oos = new ObjectOutputStream(fos)) {
 			oos.writeObject(data);
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -48,7 +49,8 @@ public class Serialization {
 	}
 
 	private static SaveData load() {
-		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); ObjectInputStream ois = new ObjectInputStream(fis)) {
+		try (FileInputStream fis = new FileInputStream(new File(DATA_FILE)); 
+				ObjectInputStream ois = new ObjectInputStream(fis)) {
 			return (SaveData) ois.readObject();
 		} catch (IOException e) {
 			e.printStackTrace();
